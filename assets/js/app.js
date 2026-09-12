@@ -99,7 +99,7 @@
         btn = $("#enterBtn"), name = $("#splashName");
 
     // letter-by-letter title
-    var words = ["RENE", "BATERBONIA"];
+    var words = ["ALPHA", "BOIS"];
     words.forEach(function (w, wi) {
       if (wi) name.appendChild(document.createElement("br"));
       w.split("").forEach(function (ch, i) {

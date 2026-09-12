@@ -35,13 +35,49 @@
     return ctx;
   }
 
-  function ready() {
-    init();
-    if (ctx && ctx.state === "suspended") {
+  function resume() {
+    if (!ctx || ctx.state !== "suspended") return;
+    try {
       var p = ctx.resume();
       if (p && p.catch) p.catch(function () {});
+    } catch (e) {}
+  }
+
+  // Browsers start the context suspended until a real user gesture.
+  // iOS in particular wants an actual buffer played from inside that
+  // gesture, so do both: resume and fire one silent sample.
+  function ready() {
+    init();
+    if (!ctx) return;
+    resume();
+    try {
+      var b = ctx.createBuffer(1, 1, ctx.sampleRate);
+      var src = ctx.createBufferSource();
+      src.buffer = b;
+      src.connect(ctx.destination);
+      src.start(0);
+    } catch (e) {}
+  }
+
+  // Unlock on the earliest possible gesture, in the capture phase, so it
+  // runs before any of the page's own handlers try to make a noise.
+  var GESTURES = ["pointerdown", "touchstart", "mousedown", "keydown"];
+  function onFirstGesture() {
+    ready();
+    if (ctx && ctx.state === "running") {
+      for (var g = 0; g < GESTURES.length; g++) {
+        window.removeEventListener(GESTURES[g], onFirstGesture, true);
+      }
     }
   }
+  for (var gi = 0; gi < GESTURES.length; gi++) {
+    window.addEventListener(GESTURES[gi], onFirstGesture, true);
+  }
+
+  // coming back from a background tab can leave it suspended
+  document.addEventListener("visibilitychange", function () {
+    if (!document.hidden) resume();
+  });
 
   /* ---------- building blocks ---------- */
 
@@ -246,7 +282,11 @@
     if (muted) return;
     if (!ctx) { init(); }
     if (!ctx || !SOUNDS[name]) return;
-    if (ctx.state === "suspended") return;   // not unlocked yet
+    // Do NOT bail while suspended. Nodes scheduled against a suspended
+    // context still fire once it resumes (currentTime is frozen until
+    // then), so kick off the resume and schedule the sound anyway -
+    // otherwise the first sounds of the session are lost.
+    resume();
 
     // don't let the same sound retrigger faster than 28ms
     var now = (window.performance && performance.now) ? performance.now() : Date.now();
@@ -269,6 +309,7 @@
     play: play,
     setMuted: setMuted,
     isMuted: function () { return muted; },
+    state: function () { return ctx ? ctx.state : "none"; },
     names: Object.keys(SOUNDS)
   };
 })();
