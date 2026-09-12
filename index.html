@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>RENE BATERBONIA 💖 ALPHA BOIS</title>
+<meta name="description" content="tara ya. tara gala. tara mamatron. best viewed on mobile.">
+<meta name="theme-color" content="#12042a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%96%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ===== DESKTOP SIDE NOTE ===== -->
+<div class="desknote" aria-hidden="true">
+  <div class="deskbubble">
+    <div class="dn-big">📱</div>
+    <h3>MOBILE ONLY KUNO</h3>
+    <p>gi-design ni para sa phone. sa desktop, kulang ug vibe.</p>
+    <div class="dn-tag">tara ya 💖</div>
+  </div>
+</div>
+
+<!-- ===== SPLASH ===== -->
+<div class="splash" id="splash">
+  <div class="splash-inner">
+    <div class="splash-sticker s1">💖</div>
+    <div class="splash-sticker s2">✨</div>
+    <div class="splash-sticker s3">💫</div>
+    <div class="splash-sticker s4">💘</div>
+    <h1 class="bigname" id="splashName"></h1>
+    <div class="loadwrap">
+      <div class="loadbar"><i id="loadFill"></i></div>
+      <div class="loadtxt" id="loadTxt">loading galawgaw...</div>
+    </div>
+    <button class="enterbtn" id="enterBtn" hidden>TARA YA 💞</button>
+  </div>
+</div>
+
+<!-- ===== TOP MARQUEE ===== -->
+<header class="topbar">
+  <div class="marquee"><div class="marquee-track" id="mqTrack"></div></div>
+</header>
+
+<main class="shell" id="shell">
+
+  <!-- 1. HERO -->
+  <section class="sec hero" id="hero">
+    <div class="wobble-title">
+      <h2 class="disp glow">rene<br>baterbonia</h2>
+    </div>
+    <p class="sub">↓ pindota ang nawong ↓</p>
+
+    <div class="heartframe" id="heartFrame">
+      <div class="hf-clip"><img id="heroImg" src="assets/img/pic03.webp" alt="hero"></div>
+      <div class="hf-ring"></div>
+      <span class="orbit o1">tara ya</span>
+      <span class="orbit o2">ano jay?</span>
+      <span class="orbit o3">galawgaw</span>
+      <span class="orbit o4">alpha bois</span>
+    </div>
+
+    <div class="tapcount">nawong nga giilisan: <b id="faceCount">0</b></div>
+    <div class="scrollhint">scroll ✧ scroll ✧ scroll</div>
+  </section>
+
+  <!-- 2. ANO JAY - WHACK A MOLE -->
+  <section class="sec jay" id="jay">
+    <h2 class="disp pop">ANO JAY?</h2>
+    <p class="sub">pindota sila before mawala. 15 seconds ra.</p>
+    <div class="hud">
+      <div class="hud-box"><span>SCORE</span><b id="jayScore">0</b></div>
+      <div class="hud-box"><span>TIME</span><b id="jayTime">15</b></div>
+    </div>
+    <div class="molegrid" id="moleGrid"></div>
+    <button class="bigbtn" id="jayStart">START ✨</button>
+    <div class="jay-say" id="jaySay">&nbsp;</div>
+  </section>
+
+  <!-- 3. TARA MAMATRON - REELS -->
+  <section class="sec mamatron" id="mamatron">
+    <h2 class="disp pop2">tara mamatron</h2>
+    <p class="sub">swipe up ↕ para sa sunod</p>
+    <div class="reels" id="reels">
+      <div class="reel" data-type="video">
+        <video src="assets/vid/vid1.mp4" muted loop playsinline preload="metadata"></video>
+        <div class="reel-ui">
+          <div class="reel-cap"><b>@alpha_bois</b><span>tara mamatron 🛵💨</span></div>
+          <div class="reel-side">
+            <button class="rbtn like" data-like>💖<i>0</i></button>
+            <button class="rbtn">💬<i>69</i></button>
+            <button class="rbtn">↗<i>ML</i></button>
+          </div>
+          <div class="unmute" data-unmute>🔇 tap para naay tingog</div>
+        </div>
+      </div>
+      <div class="reel" data-type="photo">
+        <img src="assets/img/pic06.png" alt="reel">
+        <div class="reel-ui">
+          <div class="reel-cap"><b>@ano_erp</b><span>flat hair no worries 💇</span></div>
+          <div class="reel-side">
+            <button class="rbtn like" data-like>💖<i>0</i></button>
+            <button class="rbtn">💬<i>6</i></button>
+            <button class="rbtn">↗<i>48</i></button>
+          </div>
+        </div>
+      </div>
+      <div class="reel" data-type="video">
+        <video src="assets/vid/vid2.mp4" muted loop playsinline preload="metadata"></video>
+        <div class="reel-ui">
+          <div class="reel-cap"><b>@suntukay</b><span>ano erp?? open erp 😭</span></div>
+          <div class="reel-side">
+            <button class="rbtn like" data-like>💖<i>0</i></button>
+            <button class="rbtn">💬<i>420</i></button>
+            <button class="rbtn">↗<i>ya</i></button>
+          </div>
+          <div class="unmute" data-unmute>🔇 tap para naay tingog</div>
+        </div>
+      </div>
+      <div class="reel" data-type="photo">
+        <img src="assets/img/pic16.webp" alt="reel">
+        <div class="reel-ui">
+          <div class="reel-cap"><b>@memories</b><span>2 years since... rara sleepover 🥹</span></div>
+          <div class="reel-side">
+            <button class="rbtn like" data-like>💖<i>0</i></button>
+            <button class="rbtn">💬<i>2</i></button>
+            <button class="rbtn">↗<i>ya</i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. GALAWGAW - STICKER BOARD -->
+  <section class="sec galawgaw" id="galawgaw">
+    <h2 class="disp pop">galawgaw</h2>
+    <p class="sub">i-drag sila. double tap = tuyok.</p>
+    <div class="board" id="board"></div>
+    <div class="btnrow">
+      <button class="bigbtn alt" id="shuffleBtn">GUBAA 🌀</button>
+      <button class="bigbtn alt" id="tidyBtn">AYUSA 🧹</button>
+    </div>
+  </section>
+
+  <!-- 5. TARA GALA - SWIPE DECK -->
+  <section class="sec gala" id="gala">
+    <h2 class="disp pop2">tara gala</h2>
+    <p class="sub">swipe: ← ano erp &nbsp;|&nbsp; open erp →</p>
+    <div class="deckwrap">
+      <div class="deck" id="deck"></div>
+      <div class="deck-empty" id="deckEmpty" hidden>
+        <div class="match">
+          <div class="match-txt">IT&rsquo;S A MATCH 💘</div>
+          <img src="assets/img/pic14.webp" alt="match">
+          <div class="match-sub">rara sleepover na ni bai</div>
+          <button class="bigbtn" id="deckReset">USAB 🔁</button>
+        </div>
+      </div>
+    </div>
+    <div class="btnrow">
+      <button class="roundbtn no" data-swipe="left">✖</button>
+      <button class="roundbtn yes" data-swipe="right">💖</button>
+    </div>
+  </section>
+
+  <!-- 6. ML ML - LOSE STREAK -->
+  <section class="sec mlml" id="mlml">
+    <h2 class="disp pop">ML ML</h2>
+    <p class="sub">pindota ang OPEN OPEN. way lain mahitabo.</p>
+    <div class="scoreboard">
+      <img class="sb-bg" src="assets/img/pic15.webp" alt="squad">
+      <div class="sb-grid">
+        <div><span>WIN</span><b id="mlWin">0</b></div>
+        <div class="lose"><span>LOSE</span><b id="mlLose">0</b></div>
+        <div><span>STREAK</span><b id="mlStreak">0</b></div>
+      </div>
+      <div class="sb-tag" id="mlTag">lose streak yarn</div>
+    </div>
+    <div class="reactbox"><img id="mlFace" src="assets/img/pic04.webp" alt="reaction"></div>
+    <div class="openzone" id="openZone">
+      <button class="bigbtn open" id="openBtn">OPEN OPEN 🎮</button>
+    </div>
+  </section>
+
+  <!-- 7. SUNTUKAY -->
+  <section class="sec suntukay" id="suntukay">
+    <h2 class="disp pop2">suntukay</h2>
+    <p class="sub">mash the button. way rules.</p>
+    <div class="arena" id="arena">
+      <div class="fighter f1">
+        <div class="hpbar"><i id="hp1"></i></div>
+        <img src="assets/img/pic18.webp" alt="fighter 1">
+        <span class="fname">ano jay</span>
+      </div>
+      <div class="vs">VS</div>
+      <div class="fighter f2">
+        <div class="hpbar"><i id="hp2"></i></div>
+        <img src="assets/img/pic19.webp" alt="fighter 2">
+        <span class="fname">open erp</span>
+      </div>
+      <div class="fx" id="arenaFx"></div>
+    </div>
+    <button class="bigbtn punch" id="punchBtn">SUNTOK 👊</button>
+    <div class="ko" id="koTxt"></div>
+  </section>
+
+  <!-- 8. ALPHA BOIS GALLERY -->
+  <section class="sec alpha" id="alpha">
+    <h2 class="disp glow">alpha bois</h2>
+    <p class="sub">hall of fame. tap para dako.</p>
+    <div class="gallery" id="gallery"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <div class="foot-hearts">💖 💘 💝 💗 💞</div>
+    <div class="phraselist" id="phraseList"></div>
+    <button class="secret" id="secretBtn">16. ??? 🔒</button>
+    <button class="runaway" id="runBtn">bubuton kanak</button>
+    <p class="fineprint">no rights reserved · tara ya · 💞</p>
+  </footer>
+</main>
+
+<!-- ===== FIXED LAYER (stays inside the phone on desktop) ===== -->
+<div class="fixedlayer" id="fixedLayer">
+  <div class="toastwrap" id="toastWrap"></div>
+  <button class="erpfab" id="erpFab">ERP</button>
+  <nav class="dock" id="dock">
+    <a href="#hero">💖</a>
+    <a href="#jay">😱</a>
+    <a href="#mamatron">🎬</a>
+    <a href="#galawgaw">🌀</a>
+    <a href="#gala">💘</a>
+    <a href="#mlml">🎮</a>
+    <a href="#suntukay">👊</a>
+    <a href="#alpha">🏆</a>
+  </nav>
+</div>
+
+<div class="modal" id="erpModal" hidden>
+  <div class="modal-card">
+    <img src="assets/img/pic11.png" alt="erp">
+    <h3>ano erp?</h3>
+    <p id="erpLine">wa pa ka open erp?</p>
+    <div class="btnrow">
+      <button class="bigbtn" id="erpOpen">OPEN ERP</button>
+      <button class="bigbtn alt" id="erpClose">ANO ERP</button>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lb-close" id="lbClose">✖</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<div class="jumpscare" id="jumpscare" hidden>
+  <img src="assets/img/pic18.webp" alt="">
+  <div class="js-txt">ANO JAY?!</div>
+</div>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>
