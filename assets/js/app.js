@@ -9,7 +9,8 @@
   var PHRASES = [
     "rene baterbonia", "ano jay?", "tara mamatron", "tara ya", "alpha bois",
     "rara sleepover", "ML ML", "Open Open", "Lose streak yarn", "galawgaw",
-    "ano erp", "open erp", "suntukay", "tara gala", "bubuton kanak"
+    "ano erp", "open erp", "suntukay", "tara gala", "bubuton kanak",
+    "tara nomi", "tara nomihan", "grabehan ya"
   ];
 
   var IMGS = [
@@ -111,7 +112,7 @@
       [46, "warming up ang ML ML..."],
       [72, "checking lose streak yarn..."],
       [99, "almost na... 99%"],
-      [12, "charot. balik ta 12% 😭"],
+      [12, "ulol. balik ta 12% 😭"],
       [64, "tara ya, dali na..."],
       [100, "OKAY NA. alpha bois assemble 💖"]
     ];
@@ -508,7 +509,8 @@
     var LINES = [
       "lose streak yarn", "ML ML pero luya", "open open... sayop",
       "next game daog na (bakak)", "afk ang alpha bois", "kuyaw ang enemy, tara ya",
-      "1 more game... galawgaw", "suntukay na lang ta"
+      "1 more game... galawgaw", "suntukay na lang ta",
+      "grabehan ya ang lose", "tara nomi na lang ta", "ayaw na, tara nomihan"
     ];
 
     btn.addEventListener("click", function (e) {
@@ -521,7 +523,7 @@
         tag.textContent = "DAOG?! 😳";
         setTimeout(function () {
           win = 0; winEl.textContent = 0;
-          tag.textContent = "charot. lose streak yarn 💀";
+          tag.textContent = "ulol. lose streak yarn 💀";
           face.src = rand(CURSED);
           face.parentElement.classList.add("shake");
           setTimeout(function () { face.parentElement.classList.remove("shake"); }, 400);
@@ -554,7 +556,8 @@
     var f = $$(".fighter", arena);
     var names = ["ano jay", "open erp"];
     var turn = 0, over = false;
-    var WORDS = ["POW!", "BOG!", "AGI!", "ARAY!", "ML!", "YARN!", "TARA YA!", "GALAWGAW!"];
+    var WORDS = ["POW!", "BOG!", "AGI!", "ARAY!", "ML!", "YARN!", "TARA YA!",
+                 "GALAWGAW!", "GRABEHAN YA!", "ULOL!", "TARA NOMI!"];
 
     function reset() {
       hp = [100, 100]; over = false; turn = 0;
@@ -722,7 +725,10 @@
     ["galawgaw", "naay bag-ong galawgaw sa gc"],
     ["suntukay", "joke ra, hug ra 💖"],
     ["bubuton kanak", "gi-buton na ka. wala ka kabalo"],
-    ["ano erp", "erp down. as usual."]
+    ["ano erp", "erp down. as usual."],
+    ["tara nomi", "naa nay 4. ikaw na lang gipaabot 🍻"],
+    ["tara nomihan", "gabii ni bai. dili pwede mo-no 😤"],
+    ["grabehan ya", "grabehan ya ka mo-seen. ulol 💀"]
   ];
   var ti = 0;
   function startToasts() {
