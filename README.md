@@ -4,6 +4,8 @@ A troll site for the alpha bois. **Best viewed on mobile.**
 
 Plain HTML / CSS / JS. No build step, no dependencies, no framework. Just open it.
 
+UI copy is in **Waray-Waray**. The decorative phrases are left exactly as given.
+
 ## Live
 
 GitHub Pages: `https://kewnric.github.io/troll/`

@@ -39,9 +39,9 @@
 
   var DECK = [
     { img: "assets/img/pic03.webp", name: "rene", tag: "tara gala ka?" },
-    { img: "assets/img/pic07.webp", name: "roller boi", tag: "kulot muna" },
+    { img: "assets/img/pic07.webp", name: "roller boi", tag: "kulot anay" },
     { img: "assets/img/pic13.webp", name: "news wall", tag: "galawgaw certified" },
-    { img: "assets/img/pic05.webp", name: "shades", tag: "ML ML pero gabii" },
+    { img: "assets/img/pic05.webp", name: "shades", tag: "ML ML pero gab-i" },
     { img: "assets/img/pic09.webp", name: "thumbs up", tag: "open open ka?" },
     { img: "assets/img/pic20.webp", name: "tres marias", tag: "tara mamatron" }
   ];
@@ -109,11 +109,11 @@
 
     var steps = [
       [18, "loading galawgaw..."],
-      [46, "warming up ang ML ML..."],
+      [46, "warming up an ML ML..."],
       [72, "checking lose streak yarn..."],
       [99, "almost na... 99%"],
-      [12, "ulol. balik ta 12% 😭"],
-      [64, "tara ya, dali na..."],
+      [12, "ulol. balik kita 12% 😭"],
+      [64, "tara ya, gutiay na la..."],
       [100, "OKAY NA. alpha bois assemble 💖"]
     ];
     var i = 0;
@@ -217,9 +217,9 @@
       clearInterval(popT); clearInterval(clockT);
       holes.forEach(function (h) { h.classList.remove("up"); });
       startBtn.hidden = false;
-      startBtn.textContent = "USAB ✨";
+      startBtn.textContent = "LIWAT ✨";
       say.textContent = score >= 12 ? ("ALPHA BOIS! " + score + " 🏆")
-                      : score >= 6 ? ("okay ra... " + score + " 😌")
+                      : score >= 6 ? ("okay la... " + score + " 😌")
                       : ("Lose streak yarn (" + score + ") 💀");
       burstAt(say, 10);
     }
@@ -343,7 +343,7 @@
         var last = nodes[nodes.length - 1];
         place(last, ri(10, board.clientWidth - 94), ri(10, board.clientHeight - 120), ri(-25, 25), true);
         burstAt(last, 5);
-        toast("galawgaw", "di gyud mopahilom ang usa 😭");
+        toast("galawgaw", "may usa nga diri gud mapahilom 😭");
       }, 900);
     }
 
@@ -389,7 +389,7 @@
 
     $("#shuffleBtn").addEventListener("click", function () {
       scatter(true);
-      toast("galawgaw", "gi gubaan nasad nimo 🌀");
+      toast("galawgaw", "ginraot mo na liwat 🌀");
     });
     $("#tidyBtn").addEventListener("click", tidy);
 
@@ -508,9 +508,9 @@
 
     var LINES = [
       "lose streak yarn", "ML ML pero luya", "open open... sayop",
-      "next game daog na (bakak)", "afk ang alpha bois", "kuyaw ang enemy, tara ya",
-      "1 more game... galawgaw", "suntukay na lang ta",
-      "grabehan ya ang lose", "tara nomi na lang ta", "ayaw na, tara nomihan"
+      "next game daog na (buwa)", "afk an alpha bois", "makusog an enemy, tara ya",
+      "1 more game... galawgaw", "suntukay na la kita",
+      "grabehan ya an lose", "tara nomi na la kita", "ayaw na, tara nomihan"
     ];
 
     btn.addEventListener("click", function (e) {
@@ -592,7 +592,7 @@
         var winner = hp[0] <= 0 ? names[1] : names[0];
         ko.textContent = "K.O! " + winner + " daog 🏆";
         burstAt(ko, 14);
-        btn.textContent = "USAB 👊";
+        btn.textContent = "LIWAT 👊";
         toast("suntukay", winner + " daog. rematch?");
         setTimeout(function () { btn.textContent = "SUNTOK 👊"; }, 2600);
       }
@@ -643,7 +643,7 @@
         if (!opened) {
           opened = true;
           secret.textContent = "16. ano jay?? 💀";
-          toast("no. 16", "wala man diay. tara ya na lang 💖");
+          toast("no. 16", "waray man gali. tara ya na la 💖");
         }
         burstAt(secret, 12);
       }, 1100);
@@ -655,16 +655,16 @@
       if (dodges >= 5) return;
       dodges++;
       run.style.transform = "translate(" + ri(-90, 90) + "px," + ri(-26, 26) + "px) rotate(" + ri(-14, 14) + "deg)";
-      run.textContent = ["di ko", "ayaw", "layo ka", "hala", "sige na ba"][dodges - 1];
+      run.textContent = ["diri ko", "ayaw", "harayo ka", "hala", "sige na"][dodges - 1];
     }
     run.addEventListener("pointerenter", dodge);
     run.addEventListener("pointerdown", function (e) {
       if (dodges < 5) { dodge(); return; }
       e.stopPropagation();
       run.style.transform = "none";
-      run.textContent = "nadakpan! 💖";
+      run.textContent = "nadakop na! 💖";
       burstAt(run, 18);
-      toast("bubuton kanak", "nadakpan ra gyud ka 🥹");
+      toast("bubuton kanak", "nadakop gihapon ka 🥹");
       dodges = 0;
       setTimeout(function () { run.textContent = "bubuton kanak"; }, 2600);
     });
@@ -673,10 +673,10 @@
   /* ---------- ERP MODAL ---------- */
   (function erp() {
     var fab = $("#erpFab"), modal = $("#erpModal"), line = $("#erpLine"), img = $(".modal-card img", modal);
-    var ASK = ["wa pa ka open erp?", "ano erp bai?", "grades na ba?", "open erp na daw",
-               "di ma open ang erp 😭", "erp down nasad"];
-    var ANS = ["open erp... loading gihapon", "ERP: session expired 💀", "ano erp? ana sad ko",
-               "open open... error 404", "erp okay ra, ikaw ang down", "tara ya, ugma na lang"];
+    var ASK = ["diri pa ka nag-open erp?", "ano erp?", "grades na ba?", "open erp na kuno",
+               "diri ma-open an erp 😭", "erp down liwat"];
+    var ANS = ["open erp... loading gihapon", "ERP: session expired 💀", "ano erp? amo gihap akon pakiana",
+               "open open... error 404", "erp okay la, ikaw an down", "tara ya, buwas na la"];
     var n = 0;
 
     fab.addEventListener("click", function () {
@@ -692,7 +692,7 @@
       burst(e.clientX, e.clientY, 8);
       if (n >= 3) {
         modal.hidden = true;
-        toast("open erp", "gi-close na lang nako para nimo 💖");
+        toast("open erp", "ginclose ko na la para ha imo 💖");
       }
     });
     $("#erpClose").addEventListener("click", function () { modal.hidden = true; });
@@ -714,21 +714,21 @@
   }
 
   var TOASTS = [
-    ["rene baterbonia", "gi-mention ka sa gc 👀"],
-    ["tara mamatron", "3 na nag-react. tara na!"],
-    ["ML ML", "wala ka? lose streak yarn ra gihapon"],
-    ["rara sleepover", "kinsa mag dala ug pagkaon?"],
-    ["ano jay?", "wala ra, ni-chat lang 😭"],
-    ["tara gala", "gala ta ugma, bisan asa"],
-    ["alpha bois", "online tanan gawas nimo"],
-    ["open open", "open open na daw sa lobby"],
-    ["galawgaw", "naay bag-ong galawgaw sa gc"],
-    ["suntukay", "joke ra, hug ra 💖"],
-    ["bubuton kanak", "gi-buton na ka. wala ka kabalo"],
+    ["rene baterbonia", "gin-mention ka ha gc 👀"],
+    ["tara mamatron", "3 na an nag-react. tara na!"],
+    ["ML ML", "waray ka? lose streak yarn gihapon"],
+    ["rara sleepover", "hin-o an magdara hin pagkaon?"],
+    ["ano jay?", "waray la, nag-chat la 😭"],
+    ["tara gala", "gala kita buwas, bisan diin"],
+    ["alpha bois", "online ngatanan gawas ha imo"],
+    ["open open", "open open na kuno ha lobby"],
+    ["galawgaw", "may bag-o nga galawgaw ha gc"],
+    ["suntukay", "joke la, hug la 💖"],
+    ["bubuton kanak", "ginbuton ka na. diri ka maaram"],
     ["ano erp", "erp down. as usual."],
-    ["tara nomi", "naa nay 4. ikaw na lang gipaabot 🍻"],
-    ["tara nomihan", "gabii ni bai. dili pwede mo-no 😤"],
-    ["grabehan ya", "grabehan ya ka mo-seen. ulol 💀"]
+    ["tara nomi", "may 4 na. ikaw na la an ginhuhulat 🍻"],
+    ["tara nomihan", "gab-i ini. diri ka pwede mag-no 😤"],
+    ["grabehan ya", "grabehan ya ka mag-seen. ulol 💀"]
   ];
   var ti = 0;
   function startToasts() {
