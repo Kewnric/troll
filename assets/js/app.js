@@ -48,6 +48,9 @@
 
   var HEARTS = ["💖", "💘", "💝", "💗", "💞", "✨", "💫", "🩷", "😻"];
 
+  // sfx.js may be absent or unsupported - never let that break the page
+  var sfx = function (n) { if (window.SFX) window.SFX.play(n); };
+
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var rand = function (a) { return a[Math.floor(Math.random() * a.length)]; };
@@ -82,6 +85,8 @@
   }
 
   document.addEventListener("pointerdown", function (e) {
+    if (window.SFX) { window.SFX.ready(); }
+    sfx("tap");
     floater(e.clientX, e.clientY);
     if (Math.random() < 0.14) {
       floater(e.clientX + ri(-30, 30), e.clientY - 18, rand(PHRASES), true);
@@ -124,11 +129,14 @@
       }
       fill.style.width = steps[i][0] + "%";
       txt.textContent = steps[i][1];
+      if (i === 4) sfx("sadTrombone");      // the 99% -> 12% fake-out
+      else if (i === 6) sfx("fanfare");
       i++;
       setTimeout(tick, i === 5 ? 900 : 620);
     })();
 
     btn.addEventListener("click", function () {
+      sfx("fanfare");
       wrap.classList.add("gone");
       document.body.style.overflow = "";
       var r = btn.getBoundingClientRect();
@@ -148,13 +156,25 @@
 
   /* ---------- 1. HERO FACE SWAP ---------- */
   (function hero() {
-    var frame = $("#heartFrame"), img = $("#heroImg"), c = $("#faceCount"), n = 0, idx = 0;
+    var frame = $("#heartFrame"), img = $("#heroImg"), c = $("#faceCount"), n = 0;
+
+    // random every time, but never the face already on screen
+    function nextFace(pool, avoidCurrent) {
+      var cur = avoidCurrent ? img.getAttribute("src") : null;
+      var pick = rand(pool);
+      for (var i = 0; i < 8 && pool.length > 1 && pick === cur; i++) pick = rand(pool);
+      return pick;
+    }
+
+    // first face is a fresh random pick every load (any of them, no exclusions)
+    img.src = nextFace(FACES, false);
+
     frame.addEventListener("click", function (e) {
-      idx = (idx + 1) % FACES.length;
-      // every 6th tap: cursed face troll
       n++;
-      img.src = (n % 6 === 0) ? rand(CURSED) : FACES[idx];
+      // every 6th tap: cursed face troll
+      img.src = nextFace(n % 6 === 0 ? CURSED : FACES, true);
       c.textContent = n;
+      sfx(n % 6 === 0 ? "scream" : "pop");
       burst(e.clientX, e.clientY, 7);
       if (n % 6 === 0) floater(e.clientX, e.clientY - 40, "ANO JAY?!", true);
     });
@@ -184,6 +204,7 @@
         if (trap) {
           score = Math.max(0, score - 2);
           hit.textContent = "-2";
+          sfx("buzz");
           say.textContent = "ANO JAY?! 😭";
           document.body.animate(
             [{ transform: "translateX(0)" }, { transform: "translateX(-10px)" },
@@ -193,6 +214,7 @@
         } else {
           score++;
           hit.textContent = "+1";
+          sfx("coin");
           say.textContent = rand(PHRASES);
           burst(e.clientX, e.clientY, 5);
         }
@@ -221,6 +243,7 @@
       say.textContent = score >= 12 ? ("ALPHA BOIS! " + score + " 🏆")
                       : score >= 6 ? ("okay la... " + score + " 😌")
                       : ("Lose streak yarn (" + score + ") 💀");
+      sfx(score >= 12 ? "fanfare" : "sadTrombone");
       burstAt(say, 10);
     }
 
@@ -229,6 +252,7 @@
       running = true; score = 0; time = 15;
       scoreEl.textContent = 0; timeEl.textContent = 15;
       say.textContent = "tara ya! 🔥";
+      sfx("slideUp");
       startBtn.hidden = true;
       popT = setInterval(pop, 620);
       pop();
@@ -267,7 +291,8 @@
         var v = btn.closest(".reel").querySelector("video");
         v.muted = !v.muted;
         btn.classList.toggle("on", !v.muted);
-        btn.textContent = v.muted ? "🔇 tap para naay tingog" : "🔊 tingog on — tara ya";
+        btn.textContent = v.muted ? "🔇 tap para may tingog" : "🔊 tingog on — tara ya";
+        sfx("pop");
         if (!v.muted) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
       });
     });
@@ -280,6 +305,7 @@
         n++;
         i.textContent = n;
         btn.classList.add("liked");
+        sfx("kiss");
         setTimeout(function () { btn.classList.remove("liked"); }, 420);
         burst(e.clientX, e.clientY, 9);
       });
@@ -292,6 +318,7 @@
         var t = Date.now();
         if (t - last < 380) {
           burst(e.clientX, e.clientY, 12);
+          sfx("sparkle");
           floater(e.clientX, e.clientY - 50, "tara mamatron", true);
         }
         last = t;
@@ -342,6 +369,7 @@
       setTimeout(function () {
         var last = nodes[nodes.length - 1];
         place(last, ri(10, board.clientWidth - 94), ri(10, board.clientHeight - 120), ri(-25, 25), true);
+        sfx("fart");
         burstAt(last, 5);
         toast("galawgaw", "may usa nga diri gud mapahilom 😭");
       }, 900);
@@ -378,6 +406,7 @@
             el.style.transition = "transform .75s cubic-bezier(.2,1.2,.3,1)";
             el.dataset.rot = rot;
             el.style.transform = "rotate(" + rot + "deg)";
+            sfx("boing");
             burstAt(el, 6);
           }
           lastTap = t;
@@ -389,9 +418,10 @@
 
     $("#shuffleBtn").addEventListener("click", function () {
       scatter(true);
+      sfx("whoosh");
       toast("galawgaw", "ginraot mo na liwat 🌀");
     });
-    $("#tidyBtn").addEventListener("click", tidy);
+    $("#tidyBtn").addEventListener("click", function () { sfx("slideUp"); tidy(); });
 
     // initial layout once sizes are known
     function init() { scatter(false); }
@@ -431,6 +461,7 @@
       card.style.transform = "translateX(" + (dir * 520) + "px) rotate(" + (dir * 34) + "deg)";
       card.style.opacity = "0";
       var r = card.getBoundingClientRect();
+      sfx(dir > 0 ? "sparkle" : "slideDown");
       if (dir > 0) burst(r.left + r.width / 2, r.top + r.height / 2, 10);
       setTimeout(function () {
         card.remove();
@@ -438,6 +469,7 @@
         if (!cards.length) {
           empty.hidden = false;
           var er = empty.getBoundingClientRect();
+          sfx("fanfare");
           burst(er.left + er.width / 2, er.top + er.height / 3, 16);
           toast("tara gala", "match na! rara sleepover 💘");
         } else {
@@ -521,15 +553,18 @@
         win = 1;
         winEl.textContent = 1;
         tag.textContent = "DAOG?! 😳";
+        sfx("fanfare");
         setTimeout(function () {
           win = 0; winEl.textContent = 0;
           tag.textContent = "ulol. lose streak yarn 💀";
+          sfx("sadTrombone");
           face.src = rand(CURSED);
           face.parentElement.classList.add("shake");
           setTimeout(function () { face.parentElement.classList.remove("shake"); }, 400);
         }, 1400);
       } else {
         tag.textContent = rand(LINES);
+        sfx("buzz");
       }
       loseEl.textContent = lose;
       streakEl.textContent = streak;
@@ -543,6 +578,7 @@
         var w = zone.clientWidth, bw = btn.offsetWidth;
         var max = Math.max(0, (w - bw) / 2 - 6);
         btn.style.transform = "translate(" + ri(-max, max) + "px," + ri(-8, 8) + "px)";
+        sfx("boing");
       }
       if (lose === 15) toast("ML ML", "15 lose straight. legend 💀");
     });
@@ -572,6 +608,7 @@
       hp[victim] = Math.max(0, hp[victim] - ri(4, 11));
       bars[victim].style.width = hp[victim] + "%";
 
+      sfx("punch");
       f[victim].classList.add("hurt");
       setTimeout(function () { f[victim].classList.remove("hurt"); }, 320);
       arena.classList.add("hit");
@@ -591,6 +628,7 @@
         over = true;
         var winner = hp[0] <= 0 ? names[1] : names[0];
         ko.textContent = "K.O! " + winner + " daog 🏆";
+        sfx("fanfare");
         burstAt(ko, 14);
         btn.textContent = "LIWAT 👊";
         toast("suntukay", winner + " daog. rematch?");
@@ -610,11 +648,12 @@
         lbImg.src = src;
         lbCap.textContent = rand(PHRASES);
         lb.hidden = false;
+        sfx("pop");
         burst(e.clientX, e.clientY, 6);
       });
       g.appendChild(c);
     });
-    function close() { lb.hidden = true; }
+    function close() { lb.hidden = true; sfx("whoosh"); }
     $("#lbClose").addEventListener("click", close);
     lb.addEventListener("click", function (e) { if (e.target === lb || e.target === lbImg) close(); });
   })();
@@ -638,6 +677,7 @@
     var js = $("#jumpscare"), secret = $("#secretBtn"), opened = false;
     secret.addEventListener("click", function () {
       js.hidden = false;
+      sfx("scream");
       setTimeout(function () {
         js.hidden = true;
         if (!opened) {
@@ -656,6 +696,7 @@
       dodges++;
       run.style.transform = "translate(" + ri(-90, 90) + "px," + ri(-26, 26) + "px) rotate(" + ri(-14, 14) + "deg)";
       run.textContent = ["diri ko", "ayaw", "harayo ka", "hala", "sige na"][dodges - 1];
+      sfx(dodges % 2 ? "boing" : "fart");
     }
     run.addEventListener("pointerenter", dodge);
     run.addEventListener("pointerdown", function (e) {
@@ -663,6 +704,7 @@
       e.stopPropagation();
       run.style.transform = "none";
       run.textContent = "nadakop na! 💖";
+      sfx("fanfare");
       burstAt(run, 18);
       toast("bubuton kanak", "nadakop gihapon ka 🥹");
       dodges = 0;
@@ -683,19 +725,21 @@
       line.textContent = rand(ASK);
       img.src = rand(FACES);
       modal.hidden = false;
+      sfx("notify");
       n = 0;
     });
     $("#erpOpen").addEventListener("click", function (e) {
       n++;
       line.textContent = rand(ANS);
       img.src = rand(n >= 2 ? CURSED : FACES);
+      sfx("buzz");
       burst(e.clientX, e.clientY, 8);
       if (n >= 3) {
         modal.hidden = true;
         toast("open erp", "ginclose ko na la para ha imo 💖");
       }
     });
-    $("#erpClose").addEventListener("click", function () { modal.hidden = true; });
+    $("#erpClose").addEventListener("click", function () { modal.hidden = true; sfx("pop"); });
     modal.addEventListener("click", function (e) { if (e.target === modal) modal.hidden = true; });
   })();
 
@@ -707,6 +751,7 @@
     t.className = "toast";
     t.innerHTML = '<img src="' + rand(IMGS) + '" alt=""><div><b>' + title + "</b><span>" + body + "</span></div>";
     toastWrap.appendChild(t);
+    sfx("notify");
     setTimeout(function () {
       t.classList.add("out");
       setTimeout(function () { t.remove(); }, 360);
@@ -739,12 +784,32 @@
     }, 4000);
   }
 
+  /* ---------- SOUND TOGGLE ---------- */
+  (function soundToggle() {
+    var btn = $("#sfxFab");
+    if (!btn) return;
+    function paint() {
+      var off = window.SFX ? window.SFX.isMuted() : true;
+      btn.textContent = off ? "🔇" : "🔊";
+      btn.classList.toggle("off", off);
+    }
+    paint();
+    btn.addEventListener("click", function () {
+      if (!window.SFX) return;
+      window.SFX.ready();
+      window.SFX.setMuted(!window.SFX.isMuted());
+      paint();
+      sfx("pop");
+    });
+  })();
+
   /* ---------- DOCK smooth scroll ---------- */
   $$("#dock a").forEach(function (a) {
     a.addEventListener("click", function (e) {
       e.preventDefault();
       var el = document.querySelector(a.getAttribute("href"));
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      sfx("whoosh");
       burstAt(a, 5);
     });
   });

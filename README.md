@@ -28,6 +28,20 @@ GitHub Pages: `https://kewnric.github.io/troll/`
 
 Plus: fake notifications, heart trail on every tap, floating ERP modal, and a marquee that never stops.
 
+## Sound
+
+Every interaction has a cartoon sound effect — boing, slide whistle, sad trombone,
+coin, punch, buzzer, and yes, a fart on the runaway button.
+
+There are **no audio files**. `assets/js/sfx.js` synthesizes all 17 sounds with the
+Web Audio API (oscillators, filtered noise, envelopes), so there is nothing to
+download, nothing to license, and no extra requests. If the browser has no Web
+Audio support the site just stays silent.
+
+The 🔊 button above the ERP button mutes everything; the choice is remembered in
+`localStorage`. Audio only starts after the first tap, per mobile autoplay rules.
+Add or retune sounds in the `SOUNDS` object in `assets/js/sfx.js`.
+
 ## Structure
 
 ```

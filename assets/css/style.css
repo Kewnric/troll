@@ -429,6 +429,16 @@ button{font-family:var(--body);cursor:pointer;border:0;background:none;color:inh
 .dock a{font-size:20px;text-decoration:none;transition:transform .15s ease;line-height:1}
 .dock a:active{transform:scale(1.5) translateY(-4px)}
 
+.sfxfab{
+  position:absolute;left:20px;bottom:calc(var(--dock-h) + 88px + env(safe-area-inset-bottom));
+  width:46px;height:46px;border-radius:50%;font-size:19px;
+  background:rgba(15,3,38,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:3px solid rgba(255,255,255,.6);box-shadow:0 6px 16px rgba(0,0,0,.5);
+  transition:transform .15s ease;
+}
+.sfxfab:active{transform:scale(.88)}
+.sfxfab.off{opacity:.55;border-color:rgba(255,255,255,.3)}
+
 .erpfab{
   position:absolute;left:14px;bottom:calc(var(--dock-h) + 22px + env(safe-area-inset-bottom));
   width:58px;height:58px;border-radius:50%;font-family:var(--disp);font-size:17px;color:#12042a;
